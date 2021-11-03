@@ -8,11 +8,11 @@ spring:
       db-type: com.alibaba.druid.pool.DruidDataSource
       driverClassName: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
       #      远程sql
-      url: jdbc:log4jdbc:mysql://119.3.186.94:3306/fishing?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useSSL=false
+      url: jdbc:log4jdbc:mysql://localhost:3306/ocean?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useSSL=false
       #      本地sql
       #      url: jdbc:log4jdbc:mysql://localhost:3306/eladmin?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useSSL=false
       username: root
-      password: Halo_xiao@123
+      password: haloxiao
       # 初始连接数
       initial-size: 5
       # 最小连接数
@@ -60,42 +60,6 @@ spring:
     database: 0
     timeout: 5000
 
-  cloud:
-    stream:
-      default-binder: kafka
-      kafka:
-        binder:
-          brokers: 42.192.36.193:9092
-          configuration:
-            security:
-              protocol: SASL_PLAINTEXT
-            sasl:
-              mechanism: PLAIN
-
-      bindings:
-        mqtt-in:
-          destination: mqtt_p10
-          group: default
-          content-type: application/json
-        mqtt-out:
-          destination: mqtt_p10
-          group: default
-          content-type: application/json
-
-  kafka:
-    bootstrap-servers: 42.192.36.193:9092
-    producer:
-      properties:
-        sasl:
-          mechanism: PLAIN
-        security:
-          protocol: SASL_PLAINTEXT
-    consumer:
-      properties:
-        sasl:
-          mechanism: PLAIN
-        security:
-          protocol: SASL_PLAINTEXT
 
 # 登录相关配置
 login:

@@ -42,10 +42,7 @@
         <protostuff.version>1.5.9</protostuff.version>
         <mybatis.version>3.4.2</mybatis.version>
         <guava.version>29.0-jre</guava.version>
-        <grava.version>29.0-jre</grava.version>
-        <groovy.version>3.0.7</groovy.version>
         <protobuf-runtime.version>1.1.6</protobuf-runtime.version>
-        <spring-stream-kafka.version>3.0.5.RELEASE</spring-stream-kafka.version>
     </properties>
 
     <dependencies>
@@ -55,13 +52,14 @@
             <artifactId>hutool-all</artifactId>
             <version>${hutool.version}</version>
         </dependency>
-
-
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>${grava.version}</version>
+            <version>${guava.version}</version>
         </dependency>
+
+
+
 
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -69,6 +67,7 @@
             <optional>true</optional>
             <version>${lombok.version}</version>
         </dependency>
+
 
     </dependencies>
 
@@ -219,11 +218,6 @@
                 <version>${spring.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-stream-binder-kafka</artifactId>
-                <version>${spring-stream-kafka.version}</version>
-            </dependency>
 
             <dependency>
                 <groupId>io.protostuff</groupId>
@@ -245,12 +239,6 @@
 
 
 
-
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>${guava.version}</version>
-            </dependency>
 
 
 

@@ -70,7 +70,7 @@ public class RSAKeyManage implements CommandLineRunner {
 
     private void refresh(boolean safe) {
         if (safe) {
-            long newVer = version+1;
+            long newVer = version + 1;
             String success = redisTemplate.execute(cas, Collections.singletonList(VERSION_NAME), version, newVer);
             if (success != null && Long.parseLong(success) >= newVer) {
                 version = Long.parseLong(success);
