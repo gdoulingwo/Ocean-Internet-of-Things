@@ -279,7 +279,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.3.5.RELEASE</version>
                 <configuration>
-                    <mainClass>org.linkworld.ocean.IotApplication</mainClass>
+                    <mainClass>org.linkworld.ocean.Application</mainClass>
                 </configuration>
                 <executions>
                     <execution>
