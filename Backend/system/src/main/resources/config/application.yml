@@ -1,0 +1,93 @@
+iot:
+  system:
+    # 全局遥测数据的超时时间,单位秒,一天
+    out-time: 86400
+  alarm:
+    # 一级缓存的时间,单位微秒,一小时
+    l1-cache-ttl: 3600000
+    # 一级缓存的最大容量
+    max-size: 10000
+    # 开启二级缓存
+    enable-l2-cache: true
+    # 二级缓存的时间,单位微秒,五小时
+    l2-cache-ttl: 18000000
+  transport:
+    mqtt:
+      host: 42.192.36.193:1883
+      username: homura
+      password: test
+      keep-alive: 10
+      min-idle: 5
+      max-idle: 10
+      total: 20
+      # 连接池空闲连接保留时间（毫秒）
+      retention-time: 1800000
+      listener-num: 3
+
+server:
+  port: 8000
+
+
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  freemarker:
+    check-template-location: false
+  profiles:
+    active: dev
+  jackson:
+    time-zone: GMT+8
+  data:
+    redis:
+      repositories:
+        enabled: false
+  #配置 Jpa
+  jpa:
+    properties:
+      hibernate:
+        ddl-auto: none
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    open-in-view: true
+
+mybatis-plus:
+  global-config:
+    banner: false
+    db-config:
+      table-prefix: iot_
+
+task:
+  pool:
+    # 核心线程池大小
+    core-pool-size: 10
+    # 最大线程数
+    max-pool-size: 30
+    # 活跃时间
+    keep-alive-seconds: 60
+    # 队列容量
+    queue-capacity: 50
+
+#七牛云
+qiniu:
+  # 文件大小 /M
+  max-size: 15
+
+#邮箱验证码有效时间/秒
+code:
+  expiration: 300
+
+
+rule-engine:
+  component:
+    packages: org.linkworld.fishing.manager.engine.components
+    version: 0
+verticle:
+  packages: org.linkworld.fishing
+
+vertx:
+  core:
+    event-loop-pool-size: 8
+    worker-pool-size: 8
+    internal-blocking-pool-size: 2
+    prefer-native-transport: false
+
