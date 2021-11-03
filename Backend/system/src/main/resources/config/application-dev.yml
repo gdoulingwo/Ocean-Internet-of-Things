@@ -54,9 +54,9 @@ spring:
   redis:
     #    host: 139.159.163.37
     # lcm redis cloud
-    host: 139.159.163.37
+    host: localhost
     port: 6379
-    password: 'Link_World@OnlineRedis2021'
+#    password: 'Link_World@OnlineRedis2021'
     database: 0
     timeout: 5000
 
@@ -144,30 +144,4 @@ mybatis-plus:
   configuration:
     # 简短打印
     log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
-
-
-rule-engine:
-  transport:
-    mqtt:
-      port: 1883
-      address: broker.emqx.io
-  mysql:
-    port: 3306
-    host: 119.3.186.94
-    database: fishing
-    user: root
-    password: Halo_xiao@123
-    maxSize: 10
-  redis:
-    password: 'Link_World@OnlineRedis2021'
-    #    end-points: redis://139.159.163.37:6379
-    end-points: redis://139.159.163.37:6379
-    max-pool-size: 10
-    max-pool-waiting: 10
-  kafka:
-    host: 42.192.36.193:9092
-    group-id: Rule-Engine
-    auto-offset-reset: earliest
-    enable-auto-commit: true
-
 

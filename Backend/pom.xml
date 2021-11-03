@@ -18,6 +18,9 @@
     <modules>
         <module>eladmin</module>
         <module>system</module>
+        <module>persist</module>
+        <module>service</module>
+        <module>common</module>
     </modules>
 
     <properties>
