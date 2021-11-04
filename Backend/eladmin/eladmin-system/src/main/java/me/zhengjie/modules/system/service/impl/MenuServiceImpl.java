@@ -61,7 +61,7 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public List<MenuDto> queryAll(MenuQueryCriteria criteria, Boolean isQuery) throws Exception {
-        Sort sort = Sort.by(Sort.Direction.ASC, "menuSort");
+        Sort sort = new Sort(Sort.Direction.ASC, "menuSort");
         if(isQuery){
             criteria.setPidIsNull(true);
             List<Field> fields = QueryHelp.getAllFields(criteria.getClass(), new ArrayList<>());
@@ -197,19 +197,6 @@ public class MenuServiceImpl implements MenuService {
         }
         return menuSet;
     }
-
-    @Override
-    public Set<Menu> getChildMenus(List<Menu> menuList, Set<Menu> menuSet) {
-        for (Menu menu : menuList) {
-            menuSet.add(menu);
-            List<Menu> menus = menuRepository.findByPid(menu.getId());
-            if(menus!=null && menus.size()!=0){
-                getChildMenus(menus, menuSet);
-            }
-        }
-        return menuSet;
-    }
-
 
     @Override
     @Transactional(rollbackFor = Exception.class)

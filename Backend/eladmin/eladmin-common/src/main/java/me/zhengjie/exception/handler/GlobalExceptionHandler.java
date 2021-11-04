@@ -34,8 +34,18 @@ import static org.springframework.http.HttpStatus.*;
  * @date 2018-11-23
  */
 @Slf4j
-@RestControllerAdvice(basePackages = {"me.zhengjie"})
+@RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    /**
+     * 处理所有不可知的异常
+     */
+    @ExceptionHandler(Throwable.class)
+    public ResponseEntity<ApiError> handleException(Throwable e){
+        // 打印堆栈信息
+        log.error(ThrowableUtil.getStackTrace(e));
+        return buildResponseEntity(ApiError.error(e.getMessage()));
+    }
 
     /**
      * BadCredentialsException
@@ -76,6 +86,22 @@ public class GlobalExceptionHandler {
         // 打印堆栈信息
         log.error(ThrowableUtil.getStackTrace(e));
         return buildResponseEntity(ApiError.error(NOT_FOUND.value(),e.getMessage()));
+    }
+
+    /**
+     * 处理所有接口数据验证异常
+     */
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ApiError> handleMethodArgumentNotValidException(MethodArgumentNotValidException e){
+        // 打印堆栈信息
+        log.error(ThrowableUtil.getStackTrace(e));
+        String[] str = Objects.requireNonNull(e.getBindingResult().getAllErrors().get(0).getCodes())[1].split("\\.");
+        String message = e.getBindingResult().getAllErrors().get(0).getDefaultMessage();
+        String msg = "不能为空";
+        if(msg.equals(message)){
+            message = str[1] + ":" + message;
+        }
+        return buildResponseEntity(ApiError.error(message));
     }
 
     /**

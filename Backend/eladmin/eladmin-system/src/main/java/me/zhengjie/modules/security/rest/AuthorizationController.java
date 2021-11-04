@@ -25,19 +25,17 @@ import me.zhengjie.annotation.Log;
 import me.zhengjie.annotation.rest.AnonymousDeleteMapping;
 import me.zhengjie.annotation.rest.AnonymousGetMapping;
 import me.zhengjie.annotation.rest.AnonymousPostMapping;
+import me.zhengjie.config.RsaProperties;
 import me.zhengjie.exception.BadRequestException;
 import me.zhengjie.modules.security.config.bean.LoginCodeEnum;
 import me.zhengjie.modules.security.config.bean.LoginProperties;
 import me.zhengjie.modules.security.config.bean.SecurityProperties;
-import me.zhengjie.modules.security.security.RSAKeyManage;
 import me.zhengjie.modules.security.security.TokenProvider;
-import me.zhengjie.modules.security.service.OnlineUserService;
 import me.zhengjie.modules.security.service.dto.AuthUserDto;
 import me.zhengjie.modules.security.service.dto.JwtUserDto;
-import me.zhengjie.modules.system.domain.User;
-import me.zhengjie.modules.system.service.dto.UserDto;
-import me.zhengjie.utils.RedisUtils;
+import me.zhengjie.modules.security.service.OnlineUserService;
 import me.zhengjie.utils.RsaUtils;
+import me.zhengjie.utils.RedisUtils;
 import me.zhengjie.utils.SecurityUtils;
 import me.zhengjie.utils.StringUtils;
 import org.springframework.http.HttpStatus;
@@ -47,11 +45,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -82,7 +76,7 @@ public class AuthorizationController {
     @AnonymousPostMapping(value = "/login")
     public ResponseEntity<Object> login(@Validated @RequestBody AuthUserDto authUser, HttpServletRequest request) throws Exception {
         // 密码解密
-        String password = RsaUtils.decryptByPrivateKey(RSAKeyManage.getPrivateKey(), authUser.getPassword());
+        String password = RsaUtils.decryptByPrivateKey(RsaProperties.privateKey, authUser.getPassword());
         // 查询验证码
         String code = (String) redisUtils.get(authUser.getUuid());
         // 清除验证码
@@ -146,13 +140,5 @@ public class AuthorizationController {
     public ResponseEntity<Object> logout(HttpServletRequest request) {
         onlineUserService.logout(tokenProvider.getToken(request));
         return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @ApiOperation("获取公钥(登录时加密密码用)")
-    @AnonymousGetMapping(value = "/getPubKey")
-    public ResponseEntity<?> getPublicKey() {
-        return ResponseEntity.ok(new HashMap<String, Object>() {{
-            put("publicKey", RSAKeyManage.getPublicKey());
-        }});
     }
 }

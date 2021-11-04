@@ -13,19 +13,26 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package me.zhengjie.service.mapstruct;
+package me.zhengjie.config;
 
-import me.zhengjie.base.BaseMapper;
-import me.zhengjie.domain.Log;
-import me.zhengjie.service.dto.LogErrorDTO;
-import org.mapstruct.Mapper;
-import org.mapstruct.ReportingPolicy;
+import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Zheng Jie
- * @date 2019-5-22
- */
-@Mapper(componentModel = "spring",unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface LogErrorMapper extends BaseMapper<LogErrorDTO, Log> {
+ * @website https://el-admin.vip
+ * @description
+ * @date 2020-05-18
+ **/
+@Data
+@Component
+public class RsaProperties {
 
+    public static String privateKey;
+
+    @Value("${rsa.private_key}")
+    public void setPrivateKey(String privateKey) {
+        RsaProperties.privateKey = privateKey;
+    }
 }

@@ -17,8 +17,6 @@
         <module>eladmin-generator</module>
     </modules>
 
-    <name>EL-ADMIN</name>
-
     <parent>
         <artifactId>ocean</artifactId>
         <groupId>org.linkworld</groupId>

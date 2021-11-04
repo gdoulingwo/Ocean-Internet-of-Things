@@ -24,8 +24,6 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import me.zhengjie.modules.security.config.bean.SecurityProperties;
-import me.zhengjie.modules.security.service.dto.JwtUserDto;
-import me.zhengjie.modules.system.service.dto.UserDto;
 import me.zhengjie.utils.RedisUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -37,7 +35,10 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Key;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -84,13 +85,12 @@ public class TokenProvider implements InitializingBean {
         String authorities = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));
+
         return jwtBuilder
                 // 加入ID确保生成的 Token 都不一致
                 .setId(IdUtil.simpleUUID())
                 .claim(AUTHORITIES_KEY, authorities)
                 .setSubject(authentication.getName())
-                .claim("id", ((JwtUserDto)authentication.getPrincipal())
-                        .getUser().getId().intValue())
                 .compact();
     }
 
@@ -111,13 +111,7 @@ public class TokenProvider implements InitializingBean {
                                 .map(SimpleGrantedAuthority::new)
                                 .collect(Collectors.toList()) : Collections.emptyList();
         User principal = new User(claims.getSubject(), "******", authorities);
-
-        UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(principal, token, authorities);
-        authenticationToken.setDetails(new HashMap<String, Object>() {{
-            put("id", claims.get("id"));
-        }});
-        return authenticationToken;
+        return new UsernamePasswordAuthenticationToken(principal, token, authorities);
     }
 
     public Claims getClaims(String token) {

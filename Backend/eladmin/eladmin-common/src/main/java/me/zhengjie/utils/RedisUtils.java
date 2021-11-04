@@ -24,6 +24,7 @@ import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -704,14 +705,5 @@ public class RedisUtils {
         log.debug("成功删除缓存：" + keys.toString());
         log.debug("缓存删除数量：" + count + "个");
         log.debug("--------------------------------------------");
-    }
-
-    /**
-     * 模糊查询key
-     * @param pattern
-     * @return
-     */
-    public Set<Object> keys(String pattern) {
-        return redisTemplate.keys(pattern);
     }
 }

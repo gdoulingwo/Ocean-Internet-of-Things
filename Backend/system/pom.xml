@@ -16,8 +16,6 @@
 
 
 
-
-
         <dependency>
             <groupId>me.zhengjie</groupId>
             <artifactId>eladmin-common</artifactId>
@@ -57,11 +55,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <dependency>
-            <groupId>me.zhengjie</groupId>
-            <artifactId>eladmin-system</artifactId>
-            <version>2.6</version>
-        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -70,6 +63,10 @@
         </dependency>
 
 
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+        </dependency>
 
 
 

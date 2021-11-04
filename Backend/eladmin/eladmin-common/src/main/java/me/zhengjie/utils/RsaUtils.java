@@ -1,7 +1,6 @@
 package me.zhengjie.utils;
 
 import org.apache.commons.codec.binary.Base64;
-
 import javax.crypto.Cipher;
 import java.security.*;
 import java.security.interfaces.RSAPrivateKey;
@@ -17,17 +16,17 @@ import java.security.spec.X509EncodedKeySpec;
 public class RsaUtils {
 
     private static final String SRC = "123456";
-    public static void main(String[] args) throws Exception {
 
-        //        System.out.println("\n");
-//        RsaKeyPair keyPair = generateKeyPair();
-//        System.out.println("公钥：" + keyPair.getPublicKey());
-//        System.out.println("私钥：" + keyPair.getPrivateKey());
-//        System.out.println("\n");
-//        test1(keyPair);
-//        System.out.println("\n");
-//        test2(keyPair);
-//        System.out.println("\n");
+    public static void main(String[] args) throws Exception {
+        System.out.println("\n");
+        RsaKeyPair keyPair = generateKeyPair();
+        System.out.println("公钥：" + keyPair.getPublicKey());
+        System.out.println("私钥：" + keyPair.getPrivateKey());
+        System.out.println("\n");
+        test1(keyPair);
+        System.out.println("\n");
+        test2(keyPair);
+        System.out.println("\n");
     }
 
     /**

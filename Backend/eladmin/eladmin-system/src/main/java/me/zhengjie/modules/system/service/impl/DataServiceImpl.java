@@ -34,7 +34,7 @@ import java.util.*;
  * @description 数据权限服务实现
  * @date 2020-05-07
  **/
-@Service("systemDataServiceImpl")
+@Service
 @RequiredArgsConstructor
 @CacheConfig(cacheNames = "data")
 public class DataServiceImpl implements DataService {

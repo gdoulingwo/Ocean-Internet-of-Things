@@ -53,7 +53,4 @@ public class DictDetail extends BaseEntity implements Serializable {
 
     @ApiModelProperty(value = "排序")
     private Integer dictSort = 999;
-
-    @ApiModelProperty(value = "为默认值")
-    private Boolean isDefault;
 }

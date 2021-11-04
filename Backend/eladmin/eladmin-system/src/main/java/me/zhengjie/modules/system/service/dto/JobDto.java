@@ -21,6 +21,7 @@ import lombok.Setter;
 import me.zhengjie.base.BaseDTO;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 /**
 * @author Zheng Jie

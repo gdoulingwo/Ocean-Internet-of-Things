@@ -66,14 +66,14 @@ public class SwaggerConfig {
 
     @Bean
     public Docket createRestApi_1() {
-        String groupName = "渔业iot平台";
+        String groupName = "海洋物联网";
         // 将两个包分组存放
         return new Docket(DocumentationType.SWAGGER_2)
                 .enable(enabled)
                 .apiInfo(apiInfo())
                 .groupName(groupName)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("org.linkworld.fishing.system"))
+                .apis(RequestHandlerSelectors.basePackage("org.linkworld.ocean"))
                 .paths(PathSelectors.any())
                 .build()
                 .extensions(openApiExtensionResolver.buildExtensions(groupName))

@@ -12,15 +12,12 @@
     <artifactId>eladmin-logging</artifactId>
     <name>日志模块</name>
 
-
-
     <dependencies>
         <dependency>
             <groupId>me.zhengjie</groupId>
             <artifactId>eladmin-common</artifactId>
             <version>2.6</version>
         </dependency>
-
 
         <dependency>
             <groupId>org.mapstruct</groupId>
@@ -29,14 +26,11 @@
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct-processor</artifactId>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
         </dependency>
-
-
 
     </dependencies>
 </project>

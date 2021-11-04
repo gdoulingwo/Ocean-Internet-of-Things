@@ -59,10 +59,10 @@ public class LogAspect {
     /**
      * 配置环绕通知,使用在方法logPointcut()上注册的切入点
      *
-     * @param joinPoint join point for aspect
+     * @param joinPoint join point for advice
      */
     @Around("logPointcut()")
-    public Object ogAround(ProceedingJoinPoint joinPoint) throws Throwable {
+    public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
         Object result;
         currentTime.set(System.currentTimeMillis());
         result = joinPoint.proceed();
@@ -76,7 +76,7 @@ public class LogAspect {
     /**
      * 配置异常通知
      *
-     * @param joinPoint join point for aspect
+     * @param joinPoint join point for advice
      * @param e exception
      */
     @AfterThrowing(pointcut = "logPointcut()", throwing = "e")

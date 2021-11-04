@@ -42,7 +42,6 @@ import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author Zheng Jie
@@ -101,24 +100,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 // 静态资源等等
                 .antMatchers(
-                    HttpMethod.GET,
-                    "/*.html",
-                    "/**/*.html",
-                    "/**/*.css",
-                    "/**/*.js",
-                    "/**/*.ico",
-                    "/webSocket/**"
+                        HttpMethod.GET,
+                        "/*.html",
+                        "/**/*.html",
+                        "/**/*.css",
+                        "/**/*.js",
+                        "/webSocket/**"
                 ).permitAll()
                 // swagger 文档
-                .antMatchers(new String[] {
-                    "/doc.html",
-                    "/v2/api-docs",
-                    "/v2/api-docs-ext",
-                    "/swagger-resources",
-                    "/swagger-ui.html",
-                    "/swagger-resources/configuration/ui",
-                    "/swagger-resources/configuration/security"
-                }).permitAll()
+                .antMatchers("/swagger-ui.html").permitAll()
+                .antMatchers("/swagger-resources/**").permitAll()
+                .antMatchers("/webjars/**").permitAll()
+                .antMatchers("/*/api-docs").permitAll()
                 // 文件
                 .antMatchers("/avatar/**").permitAll()
                 .antMatchers("/file/**").permitAll()
@@ -126,7 +119,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/druid/**").permitAll()
                 // 放行OPTIONS请求
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                // 自定义匿名访问所有url放行：允许匿名和带Token访问，细粒度为每个 Request 类型
+                // 自定义匿名访问所有url放行：允许匿名和带Token访问，细腻化到每个 Request 类型
                 // GET
                 .antMatchers(HttpMethod.GET, anonymousUrls.get(RequestMethodEnum.GET.getType()).toArray(new String[0])).permitAll()
                 // POST
@@ -180,20 +173,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 }
             }
         }
-        anonymousUrls.put(RequestMethodEnum.GET.getType(), this.toRestfulApi(get));
-        anonymousUrls.put(RequestMethodEnum.POST.getType(), this.toRestfulApi(post));
-        anonymousUrls.put(RequestMethodEnum.PUT.getType(), this.toRestfulApi(put));
-        anonymousUrls.put(RequestMethodEnum.PATCH.getType(), this.toRestfulApi(patch));
-        anonymousUrls.put(RequestMethodEnum.DELETE.getType(), this.toRestfulApi(delete));
-        anonymousUrls.put(RequestMethodEnum.ALL.getType(), this.toRestfulApi(all));
+        anonymousUrls.put(RequestMethodEnum.GET.getType(), get);
+        anonymousUrls.put(RequestMethodEnum.POST.getType(), post);
+        anonymousUrls.put(RequestMethodEnum.PUT.getType(), put);
+        anonymousUrls.put(RequestMethodEnum.PATCH.getType(), patch);
+        anonymousUrls.put(RequestMethodEnum.DELETE.getType(), delete);
+        anonymousUrls.put(RequestMethodEnum.ALL.getType(), all);
         return anonymousUrls;
     }
 
     private TokenConfigurer securityConfigurerAdapter() {
         return new TokenConfigurer(tokenProvider, properties, onlineUserService, userCacheClean);
-    }
-
-    private Set<String> toRestfulApi(Set<String> sets) {
-        return sets.stream().map(uri -> uri.replaceAll("\\{.*?}", "*")).collect(Collectors.toSet());
     }
 }
