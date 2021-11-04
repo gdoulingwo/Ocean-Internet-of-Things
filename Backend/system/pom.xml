@@ -13,15 +13,20 @@
 
 
     <dependencies>
-
-        <!--Swagger3.0相关-->
+        <!--Mybatis-Plus-Generate-->
         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-boot-starter</artifactId>
-            <version>3.0.0</version>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <version>3.4.1</version>
         </dependency>
 
 
+        <!--Mybatis-Plus-Generate模板依赖-->
+       <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity-engine-core</artifactId>
+            <version>2.3</version>
+        </dependency>
 
         <dependency>
             <groupId>me.zhengjie</groupId>

@@ -76,6 +76,7 @@
 
     <dependencyManagement>
         <dependencies>
+
             <!--监控sql日志-->
             <dependency>
                 <groupId>org.bgee.log4jdbc-log4j2</groupId>
@@ -83,12 +84,12 @@
                 <version>${log4jdbc.version}</version>
             </dependency>
 
-            <!--Swagger3.0相关-->
+<!--            &lt;!&ndash;Swagger3.0相关&ndash;&gt;
             <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-boot-starter</artifactId>
                 <version>3.0.0</version>
-            </dependency>
+            </dependency>-->
 
             <!-- Swagger UI 相关 -->
             <dependency>

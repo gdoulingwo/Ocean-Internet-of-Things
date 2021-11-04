@@ -15,6 +15,7 @@
  */
 package me.zhengjie.service.impl;
 
+
 import com.alibaba.fastjson.JSON;
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
@@ -112,7 +113,6 @@ public class QiNiuServiceImpl implements QiNiuService {
             }
             Response response = uploadManager.put(file.getBytes(), key, upToken);
             //解析上传成功的结果
-
             DefaultPutRet putRet = JSON.parseObject(response.bodyString(), DefaultPutRet.class);
             QiniuContent content = qiniuContentRepository.findByKey(FileUtil.getFileNameNoEx(putRet.key));
             if(content == null){
