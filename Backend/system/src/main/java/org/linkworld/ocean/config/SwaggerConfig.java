@@ -8,11 +8,10 @@ package org.linkworld.ocean.config;
  *
  */
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
+
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.Profiles;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -29,7 +28,9 @@ import springfox.documentation.spring.web.plugins.Docket;
 public class SwaggerConfig {
     @Bean
     public Docket getDocket(Environment environment) {
+        // 设置Swagger的组名
         String groupName = "海洋物联网loT";
+        // 设置只在dev环境中能开启Swagger
         Profiles profiles = Profiles.of("dev");
         boolean dev = environment.acceptsProfiles(profiles);
         return new Docket(DocumentationType.SWAGGER_2)
@@ -38,8 +39,7 @@ public class SwaggerConfig {
                 .enable(dev)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("org.linkworld.ocean"))
-                .build()
-                ;
+                .build();
 
     }
 
