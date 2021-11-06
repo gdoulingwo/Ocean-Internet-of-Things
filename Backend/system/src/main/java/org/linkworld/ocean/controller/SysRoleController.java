@@ -1,6 +1,8 @@
 package org.linkworld.ocean.controller;
 
 
+import org.linkworld.ocean.service.SysRoleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/sys-role")
 public class SysRoleController {
-
+    @Autowired
+    private SysRoleService sysRoleService;
 }
 

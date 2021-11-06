@@ -1,5 +1,6 @@
 package org.linkworld.ocean.mapper;
 
+
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.linkworld.ocean.model.pojo.SysUser;
@@ -14,5 +15,4 @@ import org.linkworld.ocean.model.pojo.SysUser;
  */
 @Mapper
 public interface SysUserMapper extends BaseMapper<SysUser> {
-
 }

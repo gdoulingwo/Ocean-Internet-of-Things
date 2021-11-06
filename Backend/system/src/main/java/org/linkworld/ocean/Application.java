@@ -1,7 +1,10 @@
 package org.linkworld.ocean;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.Api;
+import org.linkworld.ocean.config.SwaggerConfig;
 import org.linkworld.ocean.service.impl.SysRoleServiceImpl;
+import org.linkworld.ocean.service.impl.SysUserServiceImpl;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -28,9 +31,9 @@ public class Application {
 
     public static void main(String[] args) {
         System.setProperty("java.security.auth.login.config", "classpath:security/kafka_server_jaas.conf");
-
         ConfigurableApplicationContext ioc = SpringApplication.run(Application.class, args);
-
+        SwaggerConfig bean = ioc.getBean(SwaggerConfig.class);
+        System.out.println(bean);
 
     }
 }

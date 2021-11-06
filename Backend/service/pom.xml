@@ -17,6 +17,7 @@
     </properties>
 
     <dependencies>
+        <!--Persist模块引入-->
         <dependency>
             <groupId>org.linkworld</groupId>
             <artifactId>persist</artifactId>

@@ -10,7 +10,7 @@ import org.linkworld.ocean.model.pojo.OceanSensor;
  *  Mapper 接口
  * </p>
  *
- * @author ${author}
+ * @author LiuXiangCheng
  * @since 2021-11-04
  */
 @Mapper

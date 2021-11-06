@@ -53,8 +53,7 @@ spring:
 mybatis-plus:
   global-config:
     banner: false
-    db-config:
-      table-prefix: iot_
+
 
 task:
   pool:

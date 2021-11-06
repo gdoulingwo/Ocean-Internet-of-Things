@@ -5,26 +5,21 @@ package org.linkworld.ocean.test;
  *@Since   2021/11/6  12:06
  */
 
+
 import org.junit.Test;
-import org.linkworld.ocean.mapper.OceanDynamicSensorMapper;
-import org.linkworld.ocean.service.impl.SysRoleServiceImpl;
+import org.linkworld.ocean.mapper.SysUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Configuration;
 
 @SpringBootTest
 public class CrudTest {
 
    @Autowired
-   private SysRoleServiceImpl sysRoleService;
+   private SysUserMapper sysUserMapper;
 
    @Test
    public void test() {
-         try{
-            sysRoleService.hello();
-         }catch (Exception e) {
-            System.out.println("error" + e);
-         }
+       System.out.println(sysUserMapper);
    }
 
 }

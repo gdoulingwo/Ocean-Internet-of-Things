@@ -13,6 +13,7 @@
 
 
     <dependencies>
+        <!--Service模块引入-->
         <dependency>
             <groupId>org.linkworld</groupId>
             <artifactId>service</artifactId>
@@ -33,6 +34,8 @@
             <artifactId>velocity-engine-core</artifactId>
             <version>2.3</version>
         </dependency>
+
+
 
         <dependency>
             <groupId>me.zhengjie</groupId>
