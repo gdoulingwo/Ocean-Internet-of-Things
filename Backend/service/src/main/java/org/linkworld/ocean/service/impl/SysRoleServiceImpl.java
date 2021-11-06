@@ -1,9 +1,10 @@
 package org.linkworld.ocean.service.impl;
 
-import org.linkworld.ocean.pojo.SysRole;
-import org.linkworld.ocean.dao.SysRoleMapper;
-import org.linkworld.ocean.service.SysRoleService;
+
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.linkworld.ocean.mapper.SysRoleMapper;
+import org.linkworld.ocean.model.pojo.SysRole;
+import org.linkworld.ocean.service.SysRoleService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,5 +17,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> implements SysRoleService {
+
+    public void hello() {
+        System.out.println("hello");
+    }
 
 }

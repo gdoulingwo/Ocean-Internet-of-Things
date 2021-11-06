@@ -1,9 +1,10 @@
 package org.linkworld.ocean.service.impl;
 
-import org.linkworld.ocean.pojo.OceanSensor;
-import org.linkworld.ocean.dao.OceanSensorMapper;
-import org.linkworld.ocean.service.OceanSensorService;
+
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.linkworld.ocean.mapper.OceanSensorMapper;
+import org.linkworld.ocean.model.pojo.OceanSensor;
+import org.linkworld.ocean.service.OceanSensorService;
 import org.springframework.stereotype.Service;
 
 /**

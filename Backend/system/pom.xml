@@ -13,6 +13,12 @@
 
 
     <dependencies>
+        <dependency>
+            <groupId>org.linkworld</groupId>
+            <artifactId>service</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
         <!--Mybatis-Plus-Generate-->
         <dependency>
             <groupId>com.baomidou</groupId>

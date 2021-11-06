@@ -1,4 +1,4 @@
-package org.linkworld.ocean;
+package org.linkworld.ocean.generate;
 
 /*
  *@Author  liu

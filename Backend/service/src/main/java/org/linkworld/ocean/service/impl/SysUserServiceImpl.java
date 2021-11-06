@@ -1,9 +1,10 @@
 package org.linkworld.ocean.service.impl;
 
-import org.linkworld.ocean.pojo.SysUser;
-import org.linkworld.ocean.dao.SysUserMapper;
-import org.linkworld.ocean.service.SysUserService;
+
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.linkworld.ocean.mapper.SysUserMapper;
+import org.linkworld.ocean.model.pojo.SysUser;
+import org.linkworld.ocean.service.SysUserService;
 import org.springframework.stereotype.Service;
 
 /**

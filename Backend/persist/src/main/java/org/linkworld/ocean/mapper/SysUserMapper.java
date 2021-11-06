@@ -1,8 +1,8 @@
-package org.linkworld.ocean.dao;
+package org.linkworld.ocean.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.linkworld.ocean.pojo.SysUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
+import org.linkworld.ocean.model.pojo.SysUser;
 
 /**
  * <p>

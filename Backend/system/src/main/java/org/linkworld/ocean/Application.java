@@ -1,6 +1,8 @@
 package org.linkworld.ocean;
 
 import io.swagger.annotations.Api;
+import org.linkworld.ocean.service.impl.SysRoleServiceImpl;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -20,6 +22,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 @EnableJpaRepositories(basePackages = "me.zhengjie.**.repository")
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
 @EnableConfigurationProperties
+@MapperScan("org.linkworld.ocean.mapper")
 @SpringBootApplication(scanBasePackages = {"me.zhengjie", "org.linkworld.ocean"})
 public class Application {
 
@@ -27,6 +30,8 @@ public class Application {
         System.setProperty("java.security.auth.login.config", "classpath:security/kafka_server_jaas.conf");
 
         ConfigurableApplicationContext ioc = SpringApplication.run(Application.class, args);
+
+
     }
 }
 

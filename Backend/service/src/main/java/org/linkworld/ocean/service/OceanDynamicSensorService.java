@@ -1,7 +1,8 @@
 package org.linkworld.ocean.service;
 
-import org.linkworld.ocean.pojo.OceanDynamicSensor;
+
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.linkworld.ocean.model.pojo.OceanDynamicSensor;
 
 /**
  * <p>
