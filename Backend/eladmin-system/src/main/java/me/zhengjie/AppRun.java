@@ -27,6 +27,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * 开启审计功能 -> @EnableJpaAuditing
@@ -36,6 +37,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @EnableAsync
 @RestController
+@EnableSwagger2
 @Api(hidden = true)
 @SpringBootApplication
 @EnableTransactionManagement
