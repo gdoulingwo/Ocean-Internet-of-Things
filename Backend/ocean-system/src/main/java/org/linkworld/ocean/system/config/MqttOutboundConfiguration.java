@@ -25,7 +25,7 @@ public class MqttOutboundConfiguration {
     public MqttPahoClientFactory mqttClientFactory() {
         DefaultMqttPahoClientFactory factory = new DefaultMqttPahoClientFactory();
         MqttConnectOptions options = new MqttConnectOptions();
-        options.setServerURIs(new String[]{"broker-cn.emqx.io"});
+        options.setServerURIs(new String[]{"tcp://broker.emqx.io"});
 //        options.setUserName("username");
 //        options.setPassword("password".toCharArray());
 

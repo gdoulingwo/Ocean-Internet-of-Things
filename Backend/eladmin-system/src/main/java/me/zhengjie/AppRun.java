@@ -18,12 +18,16 @@ package me.zhengjie;
 import io.swagger.annotations.Api;
 import me.zhengjie.annotation.rest.AnonymousGetMapping;
 import me.zhengjie.utils.SpringContextHolder;
+import org.mybatis.spring.annotation.MapperScan;
+import org.mybatis.spring.annotation.MapperScans;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,8 +44,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @Api(hidden = true)
 @SpringBootApplication(scanBasePackages = {"me.zhengjie", "org.linkworld.ocean.system"})
+//@MapperScan(value = {"org.linkworld.ocean.system。repository"})
 @EnableTransactionManagement
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
+@EnableJpaRepositories(basePackages = {"org.linkworld.ocean.system.repository","me.zhengjie.**.repository"})
+@EntityScan(basePackages = {"org.linkworld.ocean.system.persist.module","me.zhengjie"})
 public class AppRun {
 
     public static void main(String[] args) {

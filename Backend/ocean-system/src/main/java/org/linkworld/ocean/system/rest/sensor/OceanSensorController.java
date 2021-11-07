@@ -15,7 +15,7 @@
 */
 package org.linkworld.ocean.system.rest.sensor;
 
-import org.linkworld.ocean.system.persist.pojo.OceanSensor;
+import org.linkworld.ocean.system.persist.module.OceanSensor;
 import org.linkworld.ocean.system.service.OceanSensorService;
 import org.linkworld.ocean.system.service.dto.OceanSensorQueryCriteria;
 import org.springframework.data.domain.Pageable;

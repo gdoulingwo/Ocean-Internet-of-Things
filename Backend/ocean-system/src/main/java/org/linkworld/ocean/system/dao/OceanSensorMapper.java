@@ -1,7 +1,7 @@
 package org.linkworld.ocean.system.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.linkworld.ocean.system.persist.pojo.OceanSensor;
+import org.linkworld.ocean.system.persist.module.OceanSensor;
 
 /**
  * <p>

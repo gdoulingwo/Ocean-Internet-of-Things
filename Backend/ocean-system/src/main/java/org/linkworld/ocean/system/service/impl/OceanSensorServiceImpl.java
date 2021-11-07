@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 import me.zhengjie.utils.ValidationUtil;
 import me.zhengjie.utils.FileUtil;
 import lombok.RequiredArgsConstructor;
-import org.linkworld.ocean.system.persist.pojo.OceanSensor;
+import org.linkworld.ocean.system.persist.module.OceanSensor;
 import org.linkworld.ocean.system.repository.OceanSensorRepository;
 import org.linkworld.ocean.system.service.OceanSensorService;
 import org.linkworld.ocean.system.service.dto.OceanSensorDto;

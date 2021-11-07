@@ -16,7 +16,7 @@
 package org.linkworld.ocean.system.service.mapstruct;
 
 import me.zhengjie.base.BaseMapper;
-import org.linkworld.ocean.system.persist.pojo.OceanSensor;
+import org.linkworld.ocean.system.persist.module.OceanSensor;
 import org.linkworld.ocean.system.service.dto.OceanSensorDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;

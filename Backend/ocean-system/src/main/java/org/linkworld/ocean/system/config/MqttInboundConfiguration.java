@@ -30,12 +30,12 @@ public class MqttInboundConfiguration {
     @Bean
     public MqttPahoMessageDrivenChannelAdapter inbound() {
         MqttPahoMessageDrivenChannelAdapter adapter =
-                new MqttPahoMessageDrivenChannelAdapter("broker-cn.emqx.io", "OceanClient");
+                new MqttPahoMessageDrivenChannelAdapter("mqtt://broker.emqx.io", "OceanClient");
         adapter.setCompletionTimeout(5000);
         adapter.setConverter(new DefaultPahoMessageConverter());
         adapter.setQos(1);
         adapter.setOutputChannel(mqttInputChannel());
-        adapter.addTopic("haloxiao",1);
+        adapter.addTopic("haloxiao", 1);
         return adapter;
     }
 
