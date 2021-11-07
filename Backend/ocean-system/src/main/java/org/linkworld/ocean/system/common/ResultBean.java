@@ -20,4 +20,10 @@ public class ResultBean<T> {
         return bean;
     }
 
+    public static ResultBean FAIL() {
+        ResultBean bean = new ResultBean();
+        bean.setCode(500);
+        return bean;
+    }
+
 }

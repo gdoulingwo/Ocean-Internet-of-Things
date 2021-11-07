@@ -39,7 +39,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @RestController
 @EnableSwagger2
 @Api(hidden = true)
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"me.zhengjie", "org.linkworld.ocean.system"})
 @EnableTransactionManagement
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
 public class AppRun {

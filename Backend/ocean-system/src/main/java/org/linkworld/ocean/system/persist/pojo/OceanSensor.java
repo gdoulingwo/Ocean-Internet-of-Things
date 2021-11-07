@@ -68,6 +68,11 @@ public class OceanSensor implements Serializable {
     @ApiModelProperty(value = "注释")
     private String note;
 
+    @Column(name = "topic")
+    @ApiModelProperty(value = "mqtt topic")
+    @NotNull
+    private String topic;
+
     @Column(name = "create_time", nullable = false)
     @NotNull
     @CreationTimestamp
