@@ -57,7 +57,7 @@ public class OceanSensorServiceImpl extends ServiceImpl<OceanSensorMapper, Ocean
     @Override
     public List<OceanSensor> selectOceanSensorByPage(int pageNumber, int pageSize) {
         Page<OceanSensor> page = new Page<>(pageNumber,pageSize);
-        // 最大每页分页数限制,优先级高于分页插件内的 maxLimit
+        // 最大每页分页数限制,优先级高于分页插件内的 maxLimit,如果输入的pageSize超过20，则自动替换为20
         page.setMaxLimit(20L);
         Page<OceanSensor> oceanSensorPage = oceanSensorMapper.selectPage(page, null);
         return oceanSensorPage.getRecords();

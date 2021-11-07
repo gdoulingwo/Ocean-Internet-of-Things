@@ -1,14 +1,15 @@
 package org.linkworld.ocean.model.pojo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.util.Date;
-import com.baomidou.mybatisplus.annotation.Version;
-import com.baomidou.mybatisplus.annotation.TableId;
+
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 /**
  * <p>
@@ -21,6 +22,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @ApiModel(value="OceanSensor对象", description="")
+@Accessors(chain = true)
 public class OceanSensor implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,10 +42,11 @@ public class OceanSensor implements Serializable {
 
     @ApiModelProperty(value = "注释")
     private String note;
-
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date createTime;
 
     @ApiModelProperty(value = "mqtt topic")
+    @TableField(fill = FieldFill.DEFAULT)
     private String topic;
 
 

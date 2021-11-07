@@ -1,8 +1,11 @@
 package org.linkworld.ocean;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.Api;
 import org.linkworld.ocean.config.SwaggerConfig;
+import org.linkworld.ocean.model.pojo.OceanSensor;
+import org.linkworld.ocean.service.OceanSensorService;
 import org.linkworld.ocean.service.impl.SysRoleServiceImpl;
 import org.linkworld.ocean.service.impl.SysUserServiceImpl;
 import org.mybatis.spring.annotation.MapperScan;
@@ -14,6 +17,8 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
+
+import java.util.List;
 
 /**
  * @author HALOXIAO
@@ -32,9 +37,11 @@ public class Application {
     public static void main(String[] args) {
         System.setProperty("java.security.auth.login.config", "classpath:security/kafka_server_jaas.conf");
         ConfigurableApplicationContext ioc = SpringApplication.run(Application.class, args);
-        SwaggerConfig bean = ioc.getBean(SwaggerConfig.class);
-        System.out.println(bean);
-
+        OceanSensorService bean = ioc.getBean(OceanSensorService.class);
+        List<OceanSensor> oceanSensors = bean.selectOceanSensorByPage(-1, 5);
+        for (OceanSensor oceanSensor : oceanSensors) {
+            System.out.println(oceanSensor);
+        }
     }
 }
 

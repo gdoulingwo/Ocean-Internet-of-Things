@@ -59,7 +59,7 @@ public class OceanDynamicSensorServiceImpl extends ServiceImpl<OceanDynamicSenso
     @Override
     public List<OceanDynamicSensor> selectOceanSensorByPage(int pageNumber, int pageSize) {
         Page<OceanDynamicSensor> page = new Page<>(pageNumber,pageSize);
-        // 最大每页分页数限制,优先级高于分页插件内的 maxLimit
+        // 最大每页分页数限制,优先级高于分页插件内的 maxLimit,如果输入的pageSize超过20，则自动替换为20
         page.setMaxLimit(20L);
         Page<OceanDynamicSensor> oceanSensorPage = oceanDynamicSensorMapper.selectPage(page, null);
         return oceanSensorPage.getRecords();

@@ -13,6 +13,10 @@
 
 
     <dependencies>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
         <!--Service模块引入-->
         <dependency>
             <groupId>org.linkworld</groupId>
