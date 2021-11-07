@@ -1,13 +1,14 @@
 package org.linkworld.ocean.model.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import java.util.Date;
+import com.baomidou.mybatisplus.annotation.Version;
 import com.baomidou.mybatisplus.annotation.TableId;
+import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import java.io.Serializable;
 
 /**
  * <p>
@@ -15,7 +16,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author ${author}
- * @since 2021-11-04
+ * @since 2021-11-07
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -34,11 +35,16 @@ public class OceanSensor implements Serializable {
     @ApiModelProperty(value = "用户的配置")
     private String config;
 
-    @ApiModelProperty(value = "传感器的位置（用户设定）")
+    @ApiModelProperty(value = "传感器的位置（用户设定）,如果是GPS类型的话，直接置空")
     private String position;
 
     @ApiModelProperty(value = "注释")
     private String note;
+
+    private Date createTime;
+
+    @ApiModelProperty(value = "mqtt topic")
+    private String topic;
 
 
 }

@@ -1,6 +1,7 @@
 package org.linkworld.ocean.service.impl;
 
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.linkworld.ocean.mapper.OceanDynamicSensorMapper;
 import org.linkworld.ocean.model.pojo.OceanDynamicSensor;
@@ -53,5 +54,15 @@ public class OceanDynamicSensorServiceImpl extends ServiceImpl<OceanDynamicSenso
     @Override
     public Integer OceanDynamicSensorsCount() {
         return oceanDynamicSensorMapper.selectCount(null);
+    }
+
+    @Override
+    public List<OceanDynamicSensor> selectOceanSensorByPage(int pageNumber, int pageSize) {
+        Page<OceanDynamicSensor> page = new Page<>(pageNumber,pageSize);
+        // 最大每页分页数限制,优先级高于分页插件内的 maxLimit
+        page.setMaxLimit(20L);
+        Page<OceanDynamicSensor> oceanSensorPage = oceanDynamicSensorMapper.selectPage(page, null);
+        return oceanSensorPage.getRecords();
+
     }
 }

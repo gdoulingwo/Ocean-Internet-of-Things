@@ -28,4 +28,6 @@ public interface OceanDynamicSensorService extends IService<OceanDynamicSensor> 
     public List<OceanDynamicSensor> selectOceanDynamicSensorList();
     // 查询总传感器个数
     public Integer OceanDynamicSensorsCount();
+    // 分页查询
+    public List<OceanDynamicSensor> selectOceanSensorByPage(int pageNumber, int pageSize);
 }

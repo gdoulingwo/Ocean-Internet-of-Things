@@ -3,7 +3,6 @@ package org.linkworld.ocean.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.linkworld.ocean.model.pojo.OceanSensor;
-import org.linkworld.ocean.model.pojo.SysRole;
 
 import java.util.List;
 
@@ -28,4 +27,7 @@ public interface OceanSensorService extends IService<OceanSensor> {
     public List<OceanSensor> selectOceanSensorList();
     // 查询总传感器个数
     public Integer OceanSensorsCount();
+    // 分页查询
+    public List<OceanSensor> selectOceanSensorByPage(int pageNumber, int pageSize);
+
 }
