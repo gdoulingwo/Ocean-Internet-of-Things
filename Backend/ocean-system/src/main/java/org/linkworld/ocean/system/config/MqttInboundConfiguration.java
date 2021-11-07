@@ -30,7 +30,7 @@ public class MqttInboundConfiguration {
     @Bean
     public MqttPahoMessageDrivenChannelAdapter inbound() {
         MqttPahoMessageDrivenChannelAdapter adapter =
-                new MqttPahoMessageDrivenChannelAdapter("mqtt://broker.emqx.io", "OceanClient");
+                new MqttPahoMessageDrivenChannelAdapter("tcp://broker.emqx.io", "OceanClient");
         adapter.setCompletionTimeout(5000);
         adapter.setConverter(new DefaultPahoMessageConverter());
         adapter.setQos(1);
@@ -45,6 +45,7 @@ public class MqttInboundConfiguration {
         return new MessageHandler() {
             @Override
             public void handleMessage(Message<?> message) throws MessagingException {
+
                 System.out.println(message.getPayload());
             }
 

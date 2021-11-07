@@ -7,5 +7,5 @@ import org.springframework.stereotype.Service;
  * @since 2021-11-06 23:14
  **/
 @Service
-public interface MqttDataService {
+public interface MqttMessageService {
 }
