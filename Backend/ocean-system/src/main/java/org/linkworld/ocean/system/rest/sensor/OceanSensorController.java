@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.*;
 
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -57,9 +58,8 @@ public class OceanSensorController {
     @ApiOperation("查询Sensor")
 //    @PreAuthorize("@el.check('oceanSensor:list')")
     @AnonymousAccess
-
-    public ResponseEntity<Object> query(OceanSensorQueryCriteria criteria, Pageable pageable) {
-        return new ResponseEntity<>(oceanSensorService.queryAll(criteria, pageable), HttpStatus.OK);
+    public ResponseEntity<List<OceanSensor>> query(@RequestParam("page") Integer page, @RequestParam("size") Integer size) {
+        return new ResponseEntity<>(oceanSensorService.queryOceanSensorByPage(page, size), HttpStatus.OK);
     }
 
 
@@ -67,7 +67,6 @@ public class OceanSensorController {
     @ApiOperation("新增Sensor")
 //    @PreAuthorize("@el.check('oceanSensor:add')")
     @AnonymousAccess
-
     public ResponseEntity<Object> create(@Validated @RequestBody OceanSensor resources) {
         return new ResponseEntity<>(oceanSensorService.create(resources), HttpStatus.CREATED);
     }
