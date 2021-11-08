@@ -80,4 +80,12 @@ public interface OceanSensorService {
     * @throws IOException /
     */
     void download(List<OceanSensorDto> all, HttpServletResponse response) throws IOException;
+
+    /**
+     * 分页查询
+     * @param pageNumber 当前页码
+     * @param pageSize 每页的记录数
+     * @return List<OceanSensor>
+     */
+    List<OceanSensor> queryOceanSensorByPage(int pageNumber, int pageSize);
 }
