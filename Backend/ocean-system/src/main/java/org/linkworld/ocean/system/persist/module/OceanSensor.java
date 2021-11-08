@@ -53,7 +53,7 @@ public class OceanSensor implements Serializable {
     @Column(name = "user_id", nullable = false)
     @NotNull
     @ApiModelProperty(value = "userId")
-    private Integer userId;
+    private Long userId;
 
     @Column(name = "config", nullable = false)
     @NotNull

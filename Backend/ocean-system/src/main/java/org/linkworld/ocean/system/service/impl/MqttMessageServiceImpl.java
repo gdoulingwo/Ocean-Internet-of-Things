@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -36,7 +37,7 @@ public class MqttMessageServiceImpl implements MqttMessageService {
         data.setData(payload);
         data.setUserId(SecurityUtils.getCurrentUserId());
         data.setTopic(header.getTopic());
-        data.setTimestamp(Date.valueOf(LocalDate.now()));
+        data.setTimestamp(Timestamp.valueOf(LocalDateTime.now()));
         data.setConfigId(jsonObject.getObject("config_id", Integer.class));
         oceanSensorDataService.save(data);
     }

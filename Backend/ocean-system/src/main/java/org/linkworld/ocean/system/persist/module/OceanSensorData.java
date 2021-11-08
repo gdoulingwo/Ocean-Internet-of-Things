@@ -7,50 +7,49 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 
 /**
- * 
  * @TableName ocean_sensor_data
  */
-@TableName(value ="ocean_sensor_data")
+@TableName(value = "ocean_sensor_data")
 @Data
 public class OceanSensorData implements Serializable {
     /**
-     * 
+     *
      */
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     /**
-     * 
+     *
      */
     @TableField(value = "data")
     private String data;
 
     /**
-     * 
+     *
      */
     @TableField(value = "user_id")
     private Long userId;
 
     /**
-     * 
+     *
      */
     @TableField(value = "config_id")
     private Integer configId;
 
     /**
-     * 
+     *
      */
     @TableField(value = "topic")
     private String topic;
 
     /**
-     * 
+     *
      */
     @TableField(value = "timestamp")
-    private Date timestamp;
+    private Timestamp timestamp;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
@@ -68,11 +67,11 @@ public class OceanSensorData implements Serializable {
         }
         OceanSensorData other = (OceanSensorData) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getData() == null ? other.getData() == null : this.getData().equals(other.getData()))
-            && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
-            && (this.getConfigId() == null ? other.getConfigId() == null : this.getConfigId().equals(other.getConfigId()))
-            && (this.getTopic() == null ? other.getTopic() == null : this.getTopic().equals(other.getTopic()))
-            && (this.getTimestamp() == null ? other.getTimestamp() == null : this.getTimestamp().equals(other.getTimestamp()));
+                && (this.getData() == null ? other.getData() == null : this.getData().equals(other.getData()))
+                && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
+                && (this.getConfigId() == null ? other.getConfigId() == null : this.getConfigId().equals(other.getConfigId()))
+                && (this.getTopic() == null ? other.getTopic() == null : this.getTopic().equals(other.getTopic()))
+                && (this.getTimestamp() == null ? other.getTimestamp() == null : this.getTimestamp().equals(other.getTimestamp()));
     }
 
     @Override
