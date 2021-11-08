@@ -1,11 +1,12 @@
 package org.linkworld.ocean.system.manager;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.integration.core.MessageProducer;
 import org.springframework.integration.mqtt.inbound.MqttPahoMessageDrivenChannelAdapter;
 import org.springframework.stereotype.Component;
 
 /**
+ * 用于对MQTT Topic的控制
+ *
  * @author HALOXIAO
  * @since 2021-11-07 00:39
  **/

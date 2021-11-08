@@ -12,7 +12,6 @@ public class SensorDataVO {
     private String data;
     private String mean;
     private String topic;
-    private String attitude;
-    private String longitude;
+    private String coordinate;
 
 }

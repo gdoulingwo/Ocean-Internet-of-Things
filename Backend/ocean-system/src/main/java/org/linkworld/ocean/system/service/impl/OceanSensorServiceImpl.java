@@ -20,6 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 import me.zhengjie.utils.ValidationUtil;
 import me.zhengjie.utils.FileUtil;
 import lombok.RequiredArgsConstructor;
+import org.linkworld.ocean.system.manager.MqttTopicHandler;
 import org.linkworld.ocean.system.persist.module.OceanSensor;
 import org.linkworld.ocean.system.repository.OceanSensorRepository;
 import org.linkworld.ocean.system.service.OceanSensorService;
@@ -54,6 +55,8 @@ public class OceanSensorServiceImpl implements OceanSensorService {
     private final OceanSensorRepository oceanSensorRepository;
     private final OceanSensorMapper oceanSensorMapper;
 
+    private final MqttTopicHandler topicHandler;
+
     @Override
     public Map<String, Object> queryAll(OceanSensorQueryCriteria criteria, Pageable pageable) {
         Page<OceanSensor> page = oceanSensorRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder), pageable);
@@ -77,7 +80,6 @@ public class OceanSensorServiceImpl implements OceanSensorService {
     @Transactional(rollbackFor = Exception.class)
     public OceanSensorDto create(OceanSensor resources) {
         if (!JSONUtil.isJson(resources.getConfig())) {
-
             throw new IllegalArgumentException();
         }
 

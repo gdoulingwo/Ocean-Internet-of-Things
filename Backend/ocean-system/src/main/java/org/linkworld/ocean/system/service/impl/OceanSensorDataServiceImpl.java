@@ -37,6 +37,7 @@ public class OceanSensorDataServiceImpl extends ServiceImpl<OceanSensorDataMappe
         result.setTopic(sensorData.getTopic());
         result.setMean(sensor.getConfig());
 
+        result.setCoordinate("");
         return result;
     }
 

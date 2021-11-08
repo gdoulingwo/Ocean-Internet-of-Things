@@ -62,6 +62,7 @@ public class OceanSensorController {
         return new ResponseEntity<>(oceanSensorService.queryAll(criteria, pageable), HttpStatus.OK);
     }
 
+
     @PostMapping
     @ApiOperation("新增Sensor")
 //    @PreAuthorize("@el.check('oceanSensor:add')")
