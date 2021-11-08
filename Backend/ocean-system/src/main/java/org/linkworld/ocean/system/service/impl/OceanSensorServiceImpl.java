@@ -26,6 +26,7 @@ import org.linkworld.ocean.system.service.OceanSensorService;
 import org.linkworld.ocean.system.service.dto.OceanSensorDto;
 import org.linkworld.ocean.system.service.dto.OceanSensorQueryCriteria;
 import org.linkworld.ocean.system.service.mapstruct.OceanSensorMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.domain.Page;
@@ -53,6 +54,8 @@ public class OceanSensorServiceImpl implements OceanSensorService {
 
     private final OceanSensorRepository oceanSensorRepository;
     private final OceanSensorMapper oceanSensorMapper;
+    @Autowired
+    private org.linkworld.ocean.system.dao.OceanSensorMapper realOceanSensorMapper;
 
     @Override
     public Map<String, Object> queryAll(OceanSensorQueryCriteria criteria, Pageable pageable) {
@@ -114,5 +117,14 @@ public class OceanSensorServiceImpl implements OceanSensorService {
             list.add(map);
         }
         FileUtil.downloadExcel(list, response);
+    }
+
+    @Override
+    public List<OceanSensor> queryOceanSensorByPage(int pageNumber, int pageSize) {
+        com.baomidou.mybatisplus.extension.plugins.pagination.Page<OceanSensor> page = new com.baomidou.mybatisplus.extension.plugins.pagination.Page<>(pageNumber, pageSize);
+        // 限制最大的查询个数，若超过这个数量，则自动替换为设定的数量
+        page.setMaxLimit(20L);
+        com.baomidou.mybatisplus.extension.plugins.pagination.Page<OceanSensor> oceanSensorPage = realOceanSensorMapper.selectPage(page, null);
+        return oceanSensorPage.getRecords();
     }
 }

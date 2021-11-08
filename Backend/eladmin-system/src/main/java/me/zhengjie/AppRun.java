@@ -48,7 +48,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
 @EnableJpaRepositories(basePackages = {"org.linkworld.ocean.system.repository","me.zhengjie.**.repository"})
 @EntityScan(basePackages = {"org.linkworld.ocean.system.persist.module","me.zhengjie"})
-@MapperScan(basePackages = "org.linkworld.ocean.system.dao")
+@MapperScan(value = {"org.linkworld.ocean.system.dao"})
 public class AppRun {
 
     public static void main(String[] args) {
