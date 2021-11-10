@@ -17,6 +17,7 @@ package org.linkworld.ocean.system.rest.sensor;
 
 import me.zhengjie.annotation.AnonymousAccess;
 import org.linkworld.ocean.system.persist.module.OceanSensor;
+import org.linkworld.ocean.system.persist.vo.SensorVO;
 import org.linkworld.ocean.system.service.OceanSensorService;
 import org.linkworld.ocean.system.service.dto.OceanSensorQueryCriteria;
 import org.springframework.data.domain.Pageable;
@@ -46,12 +47,11 @@ public class OceanSensorController {
     private final OceanSensorService oceanSensorService;
 
 
-
     @GetMapping
     @ApiOperation("查询Sensor")
 //    @PreAuthorize("@el.check('oceanSensor:list')")
     @AnonymousAccess
-    public ResponseEntity<List<OceanSensor>> query(@RequestParam("page") Integer page, @RequestParam("size") Integer size) {
+    public ResponseEntity<List<SensorVO>> query(@RequestParam("page") Integer page, @RequestParam("size") Integer size) {
         return new ResponseEntity<>(oceanSensorService.queryOceanSensorByPage(page, size), HttpStatus.OK);
     }
 

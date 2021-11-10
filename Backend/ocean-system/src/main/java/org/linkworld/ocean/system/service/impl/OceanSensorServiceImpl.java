@@ -16,14 +16,15 @@
 package org.linkworld.ocean.system.service.impl;
 
 import cn.hutool.json.JSONUtil;
+import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import me.zhengjie.utils.ValidationUtil;
-import me.zhengjie.utils.FileUtil;
 import lombok.RequiredArgsConstructor;
 import org.linkworld.ocean.system.manager.MqttTopicHandler;
 import org.linkworld.ocean.system.persist.module.OceanSensor;
 import org.linkworld.ocean.system.persist.vo.SensorCoordinateVO;
 import org.linkworld.ocean.system.persist.vo.SensorDataVO;
+import org.linkworld.ocean.system.persist.vo.SensorVO;
 import org.linkworld.ocean.system.repository.OceanSensorRepository;
 import org.linkworld.ocean.system.service.OceanSensorDataService;
 import org.linkworld.ocean.system.service.OceanSensorService;
@@ -42,9 +43,7 @@ import me.zhengjie.utils.QueryHelp;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.*;
-import java.io.IOException;
 import java.util.stream.Collectors;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author HALOXIAO
@@ -127,12 +126,26 @@ public class OceanSensorServiceImpl implements OceanSensorService {
 
 
     @Override
-    public List<OceanSensor> queryOceanSensorByPage(int pageNumber, int pageSize) {
+    public List<SensorVO> queryOceanSensorByPage(int pageNumber, int pageSize) {
         com.baomidou.mybatisplus.extension.plugins.pagination.Page<OceanSensor> page = new com.baomidou.mybatisplus.extension.plugins.pagination.Page<>(pageNumber, pageSize);
         // 限制最大的查询个数，若超过这个数量，则自动替换为设定的数量
         page.setMaxLimit(20L);
         com.baomidou.mybatisplus.extension.plugins.pagination.Page<OceanSensor> oceanSensorPage = realOceanSensorMapper.selectPage(page, null);
-        return oceanSensorPage.getRecords();
+        List<OceanSensor>sensorList =  oceanSensorPage.getRecords();
+        List<SensorVO> result = new ArrayList<>(sensorList.size());
+        sensorList.forEach(sensor->{
+            SensorVO sensorVO = new SensorVO();
+            sensorVO.setTopic(sensor.getTopic());
+            sensorVO.setConfig(JSON.parse(sensor.getConfig()));
+            sensorVO.setName(sensor.getName());
+            sensorVO.setNote(sensor.getNote());
+            sensorVO.setLatitude(sensor.getLatitude());
+            sensorVO.setLongitude(sensor.getLongitude());
+            sensorVO.setCreateTime(sensor.getCreateTime());
+            result.add(sensorVO);
+        });
+        return result;
+
     }
 
     @Override

@@ -17,6 +17,7 @@ package org.linkworld.ocean.system.service;
 
 import org.linkworld.ocean.system.persist.module.OceanSensor;
 import org.linkworld.ocean.system.persist.vo.SensorCoordinateVO;
+import org.linkworld.ocean.system.persist.vo.SensorVO;
 import org.linkworld.ocean.system.service.dto.OceanSensorDto;
 import org.linkworld.ocean.system.service.dto.OceanSensorQueryCriteria;
 import org.springframework.data.domain.Pageable;
@@ -24,7 +25,6 @@ import org.springframework.data.domain.Pageable;
 import java.util.Map;
 import java.util.List;
 import java.io.IOException;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author HALOXIAO
@@ -96,7 +96,7 @@ public interface OceanSensorService {
      * @param pageSize   每页的记录数
      * @return List<OceanSensor>
      */
-    List<OceanSensor> queryOceanSensorByPage(int pageNumber, int pageSize);
+    List<SensorVO> queryOceanSensorByPage(int pageNumber, int pageSize);
 
 
     List<SensorCoordinateVO> querySensorCoordinate();
