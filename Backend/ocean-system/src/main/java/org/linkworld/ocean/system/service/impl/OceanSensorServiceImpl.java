@@ -39,6 +39,8 @@ import org.springframework.data.domain.Pageable;
 import me.zhengjie.utils.PageUtil;
 import me.zhengjie.utils.QueryHelp;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.io.IOException;
 import java.util.stream.Collectors;
@@ -91,6 +93,7 @@ public class OceanSensorServiceImpl implements OceanSensorService {
         if (!JSONUtil.isJson(resources.getConfig())) {
             throw new IllegalArgumentException();
         }
+        resources.setCreateTime(Timestamp.valueOf(LocalDateTime.now()));
 
         OceanSensorDto result = oceanSensorMapper.toDto(oceanSensorRepository.save(resources));
         topicHandler.addTopic(resources.getTopic());
@@ -122,21 +125,6 @@ public class OceanSensorServiceImpl implements OceanSensorService {
 
     }
 
-    @Override
-    public void download(List<OceanSensorDto> all, HttpServletResponse response) throws IOException {
-        List<Map<String, Object>> list = new ArrayList<>();
-        for (OceanSensorDto oceanSensor : all) {
-            Map<String, Object> map = new LinkedHashMap<>();
-            map.put(" name", oceanSensor.getName());
-            map.put(" userId", oceanSensor.getUserId());
-            map.put("用户的配置", oceanSensor.getConfig());
-            map.put("传感器的位置（用户设定）,如果是GPS类型的话，直接置空", oceanSensor.getPosition());
-            map.put("注释", oceanSensor.getNote());
-            map.put(" createTime", oceanSensor.getCreateTime());
-            list.add(map);
-        }
-        FileUtil.downloadExcel(list, response);
-    }
 
     @Override
     public List<OceanSensor> queryOceanSensorByPage(int pageNumber, int pageSize) {

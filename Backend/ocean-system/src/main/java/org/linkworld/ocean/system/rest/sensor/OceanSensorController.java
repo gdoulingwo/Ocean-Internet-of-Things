@@ -45,14 +45,7 @@ public class OceanSensorController {
 
     private final OceanSensorService oceanSensorService;
 
-    @ApiOperation("导出数据")
-    @GetMapping(value = "/download")
-//    @PreAuthorize("@el.check('oceanSensor:list')")
-    @AnonymousAccess
 
-    public void download(HttpServletResponse response, OceanSensorQueryCriteria criteria) throws IOException {
-        oceanSensorService.download(oceanSensorService.queryAll(criteria), response);
-    }
 
     @GetMapping
     @ApiOperation("查询Sensor")

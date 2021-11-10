@@ -51,7 +51,6 @@ public class OceanSensor implements Serializable {
     private String name;
 
     @Column(name = "user_id", nullable = false)
-    @NotNull
     @ApiModelProperty(value = "userId")
     private Long userId;
 
@@ -78,7 +77,6 @@ public class OceanSensor implements Serializable {
     private String topic;
 
     @Column(name = "create_time", nullable = false)
-    @NotNull
     @CreationTimestamp
     @ApiModelProperty(value = "createTime")
     private Timestamp createTime;

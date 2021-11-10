@@ -88,7 +88,6 @@ public interface OceanSensorService {
      * @param response /
      * @throws IOException /
      */
-    void download(List<OceanSensorDto> all, HttpServletResponse response) throws IOException;
 
     /**
      * 分页查询

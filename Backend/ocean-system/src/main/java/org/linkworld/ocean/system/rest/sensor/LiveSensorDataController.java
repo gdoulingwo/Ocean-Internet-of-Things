@@ -51,6 +51,5 @@ public class LiveSensorDataController {
         bean.setData(result);
         return bean;
     }
-
-
+    
 }

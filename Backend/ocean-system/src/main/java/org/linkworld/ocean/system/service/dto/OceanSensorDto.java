@@ -35,11 +35,14 @@ public class OceanSensorDto implements Serializable {
     /** 用户的配置 */
     private String config;
 
-    /** 传感器的位置（用户设定）,如果是GPS类型的话，直接置空 */
-    private String position;
+    private Double longitude;
+
+    private Double latitude;
 
     /** 注释 */
     private String note;
+
+    private String topic;
 
     private Timestamp createTime;
 }
