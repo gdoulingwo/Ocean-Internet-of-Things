@@ -77,6 +77,7 @@ public class OceanSensorController {
     @AnonymousAccess
 
     public ResponseEntity<Object> update(@Validated @RequestBody OceanSensor resources) {
+        resources.setUserId(1L);
         oceanSensorService.update(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

@@ -1,10 +1,12 @@
 package org.linkworld.ocean.system.config;
 
+import org.linkworld.ocean.system.common.MqttHeaderSupport;
+import org.linkworld.ocean.system.service.MqttMessageService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.integration.channel.DirectChannel;
-import org.springframework.integration.core.MessageProducer;
 import org.springframework.integration.mqtt.inbound.MqttPahoMessageDrivenChannelAdapter;
 import org.springframework.integration.mqtt.support.DefaultPahoMessageConverter;
 import org.springframework.messaging.Message;
@@ -21,6 +23,8 @@ import org.springframework.messaging.MessagingException;
 @Configuration
 public class MqttInboundConfiguration {
 
+    @Autowired
+    private MqttMessageService messageService;
 
     @Bean
     public MessageChannel mqttInputChannel() {
@@ -35,7 +39,7 @@ public class MqttInboundConfiguration {
         adapter.setConverter(new DefaultPahoMessageConverter());
         adapter.setQos(1);
         adapter.setOutputChannel(mqttInputChannel());
-        adapter.addTopic("haloxiao", 1);
+        adapter.addTopic( "haloxiao", 1);
         return adapter;
     }
 
@@ -45,8 +49,7 @@ public class MqttInboundConfiguration {
         return new MessageHandler() {
             @Override
             public void handleMessage(Message<?> message) throws MessagingException {
-
-                System.out.println(message.getPayload());
+                messageService.messageHandle(MqttHeaderSupport.resolveHeader(message.getHeaders()), message.getPayload().toString());
             }
 
         };

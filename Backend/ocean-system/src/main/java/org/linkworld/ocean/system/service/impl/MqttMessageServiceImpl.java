@@ -31,11 +31,14 @@ public class MqttMessageServiceImpl implements MqttMessageService {
      * 后续添加缓存，Batch方式写入DB
      * 将数据存入clickhouse or mysql
      */
+    @Override
     public void messageHandle(MessageHeaderDTO header, String payload) {
         JSONObject jsonObject = JSON.parseObject(payload);
         OceanSensorData data = new OceanSensorData();
         data.setData(payload);
-        data.setUserId(SecurityUtils.getCurrentUserId());
+//        data.setUserId(SecurityUtils.getCurrentUserId());
+        data.setUserId(1L);
+
         data.setTopic(header.getTopic());
         data.setTimestamp(Timestamp.valueOf(LocalDateTime.now()));
         data.setConfigId(jsonObject.getObject("config_id", Integer.class));

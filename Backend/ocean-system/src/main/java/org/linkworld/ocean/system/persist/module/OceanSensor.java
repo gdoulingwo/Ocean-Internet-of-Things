@@ -60,9 +60,13 @@ public class OceanSensor implements Serializable {
     @ApiModelProperty(value = "用户的配置")
     private String config;
 
-    @Column(name = "position")
-    @ApiModelProperty(value = "传感器的位置（用户设定）,如果是GPS类型的话，直接置空")
-    private String position;
+    @Column(name = "longitude")
+    @ApiModelProperty(value = "")
+    private Double longitude;
+
+    @Column(name = "latitude")
+    @ApiModelProperty(value = "")
+    private Double latitude;
 
     @Column(name = "note")
     @ApiModelProperty(value = "注释")

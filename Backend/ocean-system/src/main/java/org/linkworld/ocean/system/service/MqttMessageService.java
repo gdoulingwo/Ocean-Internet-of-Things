@@ -1,5 +1,6 @@
 package org.linkworld.ocean.system.service;
 
+import org.linkworld.ocean.system.persist.dto.MessageHeaderDTO;
 import org.springframework.stereotype.Service;
 
 /**
@@ -8,4 +9,6 @@ import org.springframework.stereotype.Service;
  **/
 @Service
 public interface MqttMessageService {
-}
+    public void messageHandle(MessageHeaderDTO header, String payload);
+
+    }

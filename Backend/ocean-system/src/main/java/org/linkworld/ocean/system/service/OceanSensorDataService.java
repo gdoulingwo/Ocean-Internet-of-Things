@@ -11,4 +11,9 @@ public interface OceanSensorDataService extends IService<OceanSensorData> {
 
     SensorDataVO queryDataRecently(Long configId);
 
+
+
+
+
+
 }

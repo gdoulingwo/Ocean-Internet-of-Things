@@ -22,11 +22,15 @@ import me.zhengjie.utils.FileUtil;
 import lombok.RequiredArgsConstructor;
 import org.linkworld.ocean.system.manager.MqttTopicHandler;
 import org.linkworld.ocean.system.persist.module.OceanSensor;
+import org.linkworld.ocean.system.persist.vo.SensorCoordinateVO;
+import org.linkworld.ocean.system.persist.vo.SensorDataVO;
 import org.linkworld.ocean.system.repository.OceanSensorRepository;
+import org.linkworld.ocean.system.service.OceanSensorDataService;
 import org.linkworld.ocean.system.service.OceanSensorService;
 import org.linkworld.ocean.system.service.dto.OceanSensorDto;
 import org.linkworld.ocean.system.service.dto.OceanSensorQueryCriteria;
 import org.linkworld.ocean.system.service.mapstruct.OceanSensorMapper;
+import org.linkworld.ocean.system.service.mapstruct.SensorConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,12 +39,10 @@ import org.springframework.data.domain.Pageable;
 import me.zhengjie.utils.PageUtil;
 import me.zhengjie.utils.QueryHelp;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.io.IOException;
+import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 
 /**
  * @author HALOXIAO
@@ -57,6 +59,9 @@ public class OceanSensorServiceImpl implements OceanSensorService {
     private final OceanSensorMapper oceanSensorMapper;
     @Autowired
     private org.linkworld.ocean.system.dao.OceanSensorMapper realOceanSensorMapper;
+
+    @Autowired
+    private final OceanSensorDataService oceanSensorDataService;
 
     private final MqttTopicHandler topicHandler;
 
@@ -82,27 +87,39 @@ public class OceanSensorServiceImpl implements OceanSensorService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public OceanSensorDto create(OceanSensor resources) {
+        resources.setUserId(1L);
         if (!JSONUtil.isJson(resources.getConfig())) {
             throw new IllegalArgumentException();
         }
 
-        return oceanSensorMapper.toDto(oceanSensorRepository.save(resources));
+        OceanSensorDto result = oceanSensorMapper.toDto(oceanSensorRepository.save(resources));
+        topicHandler.addTopic(resources.getTopic());
+        return result;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void update(OceanSensor resources) {
+
         OceanSensor oceanSensor = oceanSensorRepository.findById(resources.getId()).orElseGet(OceanSensor::new);
         ValidationUtil.isNull(oceanSensor.getId(), "OceanSensor", "id", resources.getId());
         oceanSensor.copy(resources);
         oceanSensorRepository.save(oceanSensor);
+        topicHandler.addTopic(resources.getTopic());
     }
 
     @Override
     public void deleteAll(Long[] ids) {
+        List<Long> idList = Arrays.stream(ids).collect(Collectors.toList());
+        List<OceanSensor> sensorList = oceanSensorRepository.findAllById(idList);
         for (Long id : ids) {
             oceanSensorRepository.deleteById(id);
         }
+        sensorList.forEach(sensor -> {
+            topicHandler.removeTopic(sensor.getTopic());
+        });
+
+
     }
 
     @Override
@@ -128,5 +145,30 @@ public class OceanSensorServiceImpl implements OceanSensorService {
         page.setMaxLimit(20L);
         com.baomidou.mybatisplus.extension.plugins.pagination.Page<OceanSensor> oceanSensorPage = realOceanSensorMapper.selectPage(page, null);
         return oceanSensorPage.getRecords();
+    }
+
+    @Override
+    public List<SensorCoordinateVO> querySensorCoordinate() {
+        List<OceanSensor> sensorList = oceanSensorRepository.findAll();
+        List<SensorCoordinateVO> result = new LinkedList<>();
+        Set<Long> configIdSet = new HashSet<>();
+        Map<Long, OceanSensor> dynamicSensorMap = new HashMap<>();
+        sensorList.forEach(sensor -> {
+            if (sensor.getLatitude() == null) {
+                configIdSet.add(sensor.getId());
+                dynamicSensorMap.put(sensor.getId(), sensor);
+            } else {
+                result.add(SensorConverter.toSensorCoordinateVO(sensor));
+            }
+        });
+
+        configIdSet.forEach(id -> {
+            SensorDataVO dataVO = oceanSensorDataService.queryDataRecently(id);
+            OceanSensor sensor = dynamicSensorMap.get(id);
+            sensor.setLatitude(dataVO.getLatitude());
+            sensor.setLongitude(dataVO.getLongitude());
+            result.add(SensorConverter.toSensorCoordinateVO(sensor));
+        });
+        return result;
     }
 }

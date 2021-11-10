@@ -50,6 +50,7 @@ public class ConfigurerAdapter implements WebMvcConfigurer {
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);
+
         return new CorsFilter(source);
     }
 
