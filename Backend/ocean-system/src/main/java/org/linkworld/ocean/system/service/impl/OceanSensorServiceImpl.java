@@ -131,10 +131,12 @@ public class OceanSensorServiceImpl implements OceanSensorService {
         // 限制最大的查询个数，若超过这个数量，则自动替换为设定的数量
         page.setMaxLimit(20L);
         com.baomidou.mybatisplus.extension.plugins.pagination.Page<OceanSensor> oceanSensorPage = realOceanSensorMapper.selectPage(page, null);
-        List<OceanSensor>sensorList =  oceanSensorPage.getRecords();
+        List<OceanSensor> sensorList = oceanSensorPage.getRecords();
         List<SensorVO> result = new ArrayList<>(sensorList.size());
-        sensorList.forEach(sensor->{
+        sensorList.forEach(sensor -> {
             SensorVO sensorVO = new SensorVO();
+            sensorVO.setId(sensor.getId());
+
             sensorVO.setTopic(sensor.getTopic());
             sensorVO.setConfig(JSON.parse(sensor.getConfig()));
             sensorVO.setName(sensor.getName());
@@ -171,5 +173,22 @@ public class OceanSensorServiceImpl implements OceanSensorService {
             result.add(SensorConverter.toSensorCoordinateVO(sensor));
         });
         return result;
+    }
+
+
+    @Override
+    public SensorVO queryOceanSensor(Long id) {
+        OceanSensor sensor = oceanSensorRepository.findById(id).get();
+        SensorVO sensorVO = new SensorVO();
+        sensorVO.setId(sensor.getId());
+
+        sensorVO.setTopic(sensor.getTopic());
+        sensorVO.setConfig(JSON.parse(sensor.getConfig()));
+        sensorVO.setName(sensor.getName());
+        sensorVO.setNote(sensor.getNote());
+        sensorVO.setLatitude(sensor.getLatitude());
+        sensorVO.setLongitude(sensor.getLongitude());
+        sensorVO.setCreateTime(sensor.getCreateTime());
+        return sensorVO;
     }
 }
