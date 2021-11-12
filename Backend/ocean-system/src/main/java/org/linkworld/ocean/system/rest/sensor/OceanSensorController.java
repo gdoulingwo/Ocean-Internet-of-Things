@@ -68,11 +68,11 @@ public class OceanSensorController {
     @ApiOperation("修改Sensor")
 //    @PreAuthorize("@el.check('oceanSensor:edit')")
     @AnonymousAccess
-
     public ResponseEntity<Object> update(@Validated @RequestBody OceanSensor resources) {
         resources.setUserId(1L);
         oceanSensorService.update(resources);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        SensorVO result = oceanSensorService.queryOceanSensor(resources.getId());
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @ApiOperation("删除Sensor")

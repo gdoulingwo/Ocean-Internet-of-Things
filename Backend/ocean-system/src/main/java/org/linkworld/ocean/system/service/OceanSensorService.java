@@ -102,4 +102,6 @@ public interface OceanSensorService {
     List<SensorCoordinateVO> querySensorCoordinate();
 
 
+    SensorVO queryOceanSensor(Long id);
+
 }
