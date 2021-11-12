@@ -59,8 +59,7 @@ export const constantRouterMap = [
     ]
   },
   { path: '/oceanSensor',
-    name: 'oceanSensor',
-    meta: { title: '传感器', noCache: true },
+    meta: { title: '传感器' },
     component: (resolve) => require(['@/views/oceanSensor'], resolve),
     hidden: true
   }
