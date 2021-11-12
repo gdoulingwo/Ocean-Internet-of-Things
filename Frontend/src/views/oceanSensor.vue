@@ -42,18 +42,18 @@
               </el-col>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary"><i class="el-icon-search" /> 查询</el-button>
-              <el-button type="primary" @click="resetForm('formInline')"><i class="el-icon-refresh-left" /> 重置</el-button>
+              <el-button type="primary"><i class="el-icon-search" ></i> 查询</el-button>
+              <el-button type="primary" @click="resetForm('formInline')"><i class="el-icon-refresh-left" ></i> 重置</el-button>
             </el-form-item>
           </el-form>
         </div>
         <div class="list">
           <div class="function">
-            <el-button type="primary" @click="addList"><i class="el-icon-plus" /> 增加</el-button>
-            <el-button type="primary" @click="deleteList"><i class="el-icon-delete" /> 删除</el-button>
-            <el-button type="primary" @click="reviseList"><i class="el-icon-edit" /> 修改</el-button>
-            <el-button type="primary"><i class="el-icon-download" /> 导出</el-button>
-            <el-button type="primary" class="cancel" @click="toggleSelection()"><i class="el-icon-refresh-left" /> 取消勾选</el-button>
+            <el-button type="primary" @click="addList"><i class="el-icon-plus" ></i> 增加</el-button>
+            <el-button type="primary" @click="deleteList"><i class="el-icon-delete" ></i> 删除</el-button>
+            <el-button type="primary" @click="reviseList"><i class="el-icon-edit" ></i> 修改</el-button>
+            <el-button type="primary"><i class="el-icon-download" ></i> 导出</el-button>
+            <el-button type="primary" class="cancel" @click="toggleSelection()"><i class="el-icon-refresh-left" ></i> 取消勾选</el-button>
           </div>
           <el-drawer
             title="添加传感器"
